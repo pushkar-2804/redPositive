@@ -3,21 +3,26 @@ import { Modal, TextField, Button, Box } from "@mui/material";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { inputFields, styles } from "../constants/index";
+import fetchData from "../utils/fetchData";
+import { setAllData } from "../store/slices/dataSlice";
+import { useDispatch } from "react-redux";
 
 const EditModal = ({ open, onClose, detail }) => {
-  const handleSubmit = () => {
-    axios
-      .put("http://localhost:5000/updatedata", { ...formData, _id: detail._id })
-      .then((res) => {
-        console.log(res);
-        toast.success("Data updated successfully!");
-        onClose();
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Something went wrong!");
-        onClose();
+  const dispatch = useDispatch();
+  const handleSubmit = async () => {
+    try {
+      await axios.put("http://localhost:5000/updatedata", {
+        ...formData,
+        _id: detail._id,
       });
+      const newData = await fetchData();
+      dispatch(setAllData(newData));
+      toast.success("Data updated successfully!");
+      onClose();
+    } catch (error) {
+      toast.error("Something went wrong!");
+      onClose();
+    }
   };
 
   const initialFormData = {

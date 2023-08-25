@@ -6,8 +6,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import EditModal from "./EditModal";
+import { setAllData } from "../store/slices/dataSlice";
+import { useDispatch } from "react-redux";
+import fetchData from "../utils/fetchData";
 
 export default function MoreModal({ detail }) {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [editModalOpen, setEditModalOpen] = React.useState(false);
   const open = Boolean(anchorEl);
@@ -17,21 +21,20 @@ export default function MoreModal({ detail }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleDelete = () => {
-    axios
-      .delete(`http://localhost:5000/deletedata/${detail._id}`)
-      .then((res) => {
-        console.log(res);
-        toast.success("Data deleted successfully!");
-        handleClose();
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Something went wrong!");
-        handleClose();
-      });
-  };
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:5000/deletedata/${detail._id}`);
+      const newData = await fetchData();
+      dispatch(setAllData(newData));
+      toast.success("Data deleted successfully!");
+      handleClose();
+    } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong!");
+      handleClose();
+    }
+  };
   const handleEdit = () => {
     setEditModalOpen(true);
     handleClose();

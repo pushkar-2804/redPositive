@@ -21,17 +21,12 @@ const CustomTable = () => {
   const selectedRows = useSelector((state) => state.selectedRows.selectedRows);
 
   useEffect(() => {
-    console.log(selectedRows);
-  }, [selectedRows]);
-
-  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("http://localhost:5000/alldata");
+      dispatch(setAllData(response.data));
+    };
     fetchData();
   }, []);
-
-  const fetchData = async () => {
-    const response = await axios.get("http://localhost:5000/alldata");
-    dispatch(setAllData(response.data));
-  };
 
   const handleRowSelect = (item) => {
     if (selectedRows.includes(item)) {

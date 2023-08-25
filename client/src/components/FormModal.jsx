@@ -4,9 +4,13 @@ import { ToastContainer, toast } from "react-toastify";
 import { Modal, TextField, Button, Box } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { inputFields, styles } from "../constants/index";
+import fetchData from "../utils/fetchData";
+import { setAllData } from "../store/slices/dataSlice";
+import { useDispatch } from "react-redux";
 
 const FormModal = () => {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
   const initialFormData = {
     name: "",
     phone: "",
@@ -32,22 +36,22 @@ const FormModal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:5000/setdata", formData)
-      .then(() => {
-        setFormData({
-          name: "",
-          phone: "",
-          email: "",
-          hobbies: "",
-        });
-        toast.success("Form submitted successfully");
-        handleClose();
-      })
-      .catch(() => {
-        toast.error("Error submitting form");
-        handleClose();
+    try {
+      await axios.post("http://localhost:5000/setdata", formData);
+      const newData = await fetchData();
+      dispatch(setAllData(newData));
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        hobbies: "",
       });
+      toast.success("Form submitted successfully");
+      handleClose();
+    } catch {
+      toast.error("Error submitting form");
+      handleClose();
+    }
   };
 
   return (
