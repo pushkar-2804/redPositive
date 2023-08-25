@@ -4,3 +4,30 @@
   padding: 2rem;
   text-align: center;
 }
+
+.displayButton{
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+.displayButton>*{
+  margin: 0 1rem;
+}
+
+.btnSend{
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+.btnSend>*{
+  margin: 0 1rem 0 0;
+}
+
+.modal-form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.heading{
+  text-align: center;
+}

@@ -10,7 +10,6 @@ export const sendSelectedDataByEmail = createAsyncThunk(
   "selectedRows/sendSelectedDataByEmail",
   async ({ selectedRows, email }) => {
     try {
-      console.log(selectedRows, email);
       await axios.post("http://localhost:5000/sendemail", {
         data: selectedRows,
         email,

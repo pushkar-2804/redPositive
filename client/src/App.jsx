@@ -9,12 +9,13 @@ function App() {
   const selectedRows = useSelector(
     (state) => state.selectedRows.selectedRows
   ).length;
-  console.log(selectedRows);
   return (
     <div className="App">
       <h1>CRUDS Application</h1>
-      <FormModal />
-      {selectedRows > 0 && <SendEmail />}
+      <div className="displayButton">
+        <FormModal />
+        {selectedRows > 0 && <SendEmail />}
+      </div>
       <Table />
     </div>
   );

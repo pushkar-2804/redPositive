@@ -43,7 +43,7 @@ const emailHandler = async (req, res) => {
 
     // Setup email data
     const mailOptions = {
-      from: "kharepushkar2804@gmail.com",
+      from: process.env.USER,
       to: email,
       subject: "Data from Pushkar Khare's intern project",
       html: `<h1> Data: </h1>${tableHtml}`,
