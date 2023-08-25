@@ -2,13 +2,15 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  addOrUpdateData,
+  addData,
+  updateData,
   getAllData,
   deleteData,
 } = require("../controllers/DataController.js");
 
-router.post("/setdata", addOrUpdateData);
+router.post("/setdata", addData);
+router.put("/updatedata", updateData);
 router.get("/alldata", getAllData);
-router.delete("/deletedata", deleteData);
+router.delete("/deletedata/:_id", deleteData);
 
 module.exports = router;

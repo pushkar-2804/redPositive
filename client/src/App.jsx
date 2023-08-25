@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import FormModal from "./components/FormModal";
-import Table from "./components/Table";
+import Table from "./components/Table2";
 
 function App() {
   return (

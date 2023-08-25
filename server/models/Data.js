@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
 
 const dataSchema = new mongoose.Schema({
-  // id: { type: String, required: true, unique: true },
-
   name: {
     type: String,
     required: true,
   },
-  phoneNumber: {
+  phone: {
     type: String,
     required: true,
   },

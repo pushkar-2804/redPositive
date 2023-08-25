@@ -1,12 +1,22 @@
 const Data = require("../models/Data.js");
-// const { v4: uuidv4 } = require("uuid");
 
-const addOrUpdateData = async (req, res) => {
+const addData = async (req, res) => {
   try {
     const { name, phone, email, hobbies } = req.body;
+    const data = new Data({ name, phone, email, hobbies });
+    await data.save();
+    res.json({ message: "Data added successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateData = async (req, res) => {
+  try {
+    const { _id, name, phone, email, hobbies } = req.body;
     await Data.findOneAndUpdate(
-      { email },
-      { name, phone, hobbies },
+      { _id },
+      { name, phone, hobbies, email },
       { upsert: true, new: true }
     );
 
@@ -29,12 +39,12 @@ const getAllData = async (req, res) => {
 
 const deleteData = async (req, res) => {
   try {
-    const { email, name, phone } = req.body;
-    await Data.findOneAndDelete({ email }, { phone, name });
+    const { _id } = req.params;
+    await Data.findOneAndDelete({ _id });
     res.json({ message: "Data deleted successfully" });
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = { addOrUpdateData, getAllData, deleteData };
+module.exports = { updateData, getAllData, deleteData, addData };

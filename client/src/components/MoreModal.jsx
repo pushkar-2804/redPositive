@@ -3,15 +3,38 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import EditModal from "./EditModal";
 
-export default function MoreModal() {
+export default function MoreModal({ detail }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [editModalOpen, setEditModalOpen] = React.useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:5000/deletedata/${detail._id}`)
+      .then((res) => {
+        console.log(res);
+        toast.success("Data deleted successfully!");
+        handleClose();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something went wrong!");
+        handleClose();
+      });
+  };
+
+  const handleEdit = () => {
+    setEditModalOpen(true);
+    handleClose();
   };
 
   return (
@@ -34,9 +57,15 @@ export default function MoreModal() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+        <MenuItem onClick={handleDelete}>Delete</MenuItem>
       </Menu>
+      <EditModal
+        open={editModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        detail={detail}
+      />
+      <ToastContainer />
     </div>
   );
 }
