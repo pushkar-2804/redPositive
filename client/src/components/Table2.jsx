@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import MoreModal from "./MoreModal";
 import {
@@ -11,10 +11,14 @@ import {
   TableCell,
   TableRow,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { setAllData } from "../store/slices/dataSlice";
+import { setSelectedRows } from "../store/slices/selectedSlice";
 
 const CustomTable = () => {
-  const [data, setData] = useState([]);
-  const [selectedRows, setSelectedRows] = useState([]);
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.alldata.alldata);
+  const selectedRows = useSelector((state) => state.selectedRows.selectedRows);
 
   useEffect(() => {
     console.log(selectedRows);
@@ -26,14 +30,21 @@ const CustomTable = () => {
 
   const fetchData = async () => {
     const response = await axios.get("http://localhost:5000/alldata");
-    setData(response.data);
+    dispatch(setAllData(response.data));
   };
 
   const handleRowSelect = (item) => {
     if (selectedRows.includes(item)) {
-      setSelectedRows(selectedRows.filter((row) => row !== item));
+      dispatch(setSelectedRows(selectedRows.filter((row) => row !== item)));
     } else {
-      setSelectedRows([...selectedRows, item]);
+      dispatch(setSelectedRows([...selectedRows, item]));
+    }
+  };
+  const handleCheckBox = () => {
+    if (selectedRows.length === data.length) {
+      dispatch(setSelectedRows([]));
+    } else {
+      dispatch(setSelectedRows(data.map((item) => item)));
     }
   };
 
@@ -49,13 +60,7 @@ const CustomTable = () => {
                   selectedRows.length > 0 && selectedRows.length < data.length
                 }
                 checked={selectedRows.length === data.length}
-                onChange={() => {
-                  if (selectedRows.length === data.length) {
-                    setSelectedRows([]);
-                  } else {
-                    setSelectedRows(data.map((item) => item));
-                  }
-                }}
+                onChange={handleCheckBox}
               />
             </TableCell>
             <TableCell>ID</TableCell>
