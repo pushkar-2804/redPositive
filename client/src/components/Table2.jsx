@@ -26,7 +26,10 @@ const CustomTable = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("http://localhost:5000/alldata");
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_URL}/alldata`
+      );
+      console.log(`${import.meta.env.VITE_APP_URL}/alldata`);
       dispatch(setAllData(response.data));
     };
     fetchData();
