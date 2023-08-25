@@ -30,7 +30,7 @@ const CustomTable = () => {
         `${import.meta.env.VITE_APP_URL}/alldata`
       );
       console.log(`${import.meta.env.VITE_APP_URL}/alldata`);
-      dispatch(setAllData(response.data));
+      dispatch(setAllData(response.data.reverse()));
     };
     fetchData();
   }, []);

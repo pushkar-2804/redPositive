@@ -11,7 +11,7 @@ const SendEmail = () => {
 
   const emailHandler = () => {
     toast.info("Sending Email...");
-    const email = "work.pushkarkhare@gmail.com";
+    const email = "info@redpositive.in";
     dispatch(sendSelectedDataByEmail({ selectedRows, email }));
   };
   return (
