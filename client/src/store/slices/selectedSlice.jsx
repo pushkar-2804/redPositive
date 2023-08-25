@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const initialState = {
   selectedRows: [],
@@ -10,13 +11,14 @@ export const sendSelectedDataByEmail = createAsyncThunk(
   async ({ selectedRows, email }) => {
     try {
       console.log(selectedRows, email);
-      await axios.post("", {
-        selectedRows,
+      await axios.post("http://localhost:5000/sendemail", {
+        data: selectedRows,
         email,
       });
 
       toast.success("Email has been sent!");
     } catch (error) {
+      console.error("Error sending email:", error);
       toast.error("Failed to send email!");
       throw error;
     }
