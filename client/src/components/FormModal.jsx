@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Modal, TextField, Button, Box } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { inputFields, styles } from "../constants/index";
@@ -77,7 +77,6 @@ const FormModal = () => {
 
   return (
     <div>
-      <ToastContainer />
       <Button variant="contained" onClick={handleOpen}>
         Add New Data
       </Button>

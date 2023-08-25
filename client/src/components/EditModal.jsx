@@ -94,7 +94,6 @@ const EditModal = ({ open, onClose, detail }) => {
             Cancel
           </Button>
         </form>
-        <ToastContainer />
       </Box>
     </Modal>
   );

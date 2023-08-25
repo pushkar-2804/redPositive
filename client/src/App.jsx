@@ -4,6 +4,7 @@ import FormModal from "./components/FormModal";
 import Table from "./components/Table2";
 import SendEmail from "./components/SendEmail";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const selectedRows = useSelector(
@@ -17,6 +18,7 @@ function App() {
         {selectedRows > 0 && <SendEmail />}
       </div>
       <Table />
+      <ToastContainer />
     </div>
   );
 }

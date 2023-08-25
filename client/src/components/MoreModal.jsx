@@ -4,7 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import EditModal from "./EditModal";
 import { setAllData } from "../store/slices/dataSlice";
 import { useDispatch } from "react-redux";
@@ -70,7 +70,6 @@ export default function MoreModal({ detail }) {
         onClose={() => setEditModalOpen(false)}
         detail={detail}
       />
-      <ToastContainer />
     </div>
   );
 }
