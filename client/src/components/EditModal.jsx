@@ -14,7 +14,7 @@ const EditModal = ({ open, onClose, detail }) => {
     const errors = validateForm(formData);
     if (Object.keys(errors).length === 0) {
       try {
-        await axios.put("http://localhost:5000/updatedata", {
+        await axios.put(`${import.meta.env.VITE_APP_URL}/updatedata`, {
           ...formData,
           _id: detail._id,
         });

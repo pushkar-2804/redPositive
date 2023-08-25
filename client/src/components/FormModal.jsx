@@ -61,7 +61,7 @@ const FormModal = () => {
     if (Object.keys(errors).length === 0) {
       try {
         console.log("in");
-        await axios.post("http://localhost:5000/setdata", formData);
+        await axios.post(`${import.meta.env.VITE_APP_URL}/setdata`, formData);
         const newData = await fetchData();
         dispatch(setAllData(newData));
         toast.success("Data submitted successfully");

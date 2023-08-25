@@ -10,7 +10,7 @@ export const sendSelectedDataByEmail = createAsyncThunk(
   "selectedRows/sendSelectedDataByEmail",
   async ({ selectedRows, email }) => {
     try {
-      await axios.post("http://localhost:5000/sendemail", {
+      await axios.post(`${import.meta.env.VITE_APP_URL}/sendemail`, {
         data: selectedRows,
         email,
       });

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const fetchData = async () => {
-  const response = await axios.get("http://localhost:5000/alldata");
+  const response = await axios.get(`${import.meta.env.VITE_APP_URL}/alldata`);
   return response.data;
 };
 

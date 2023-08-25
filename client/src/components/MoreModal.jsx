@@ -24,7 +24,9 @@ export default function MoreModal({ detail }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/deletedata/${detail._id}`);
+      await axios.delete(
+        `${import.meta.env.VITE_APP_URL}/deletedata/${detail._id}`
+      );
       const newData = await fetchData();
       dispatch(setAllData(newData));
       toast.success("Data deleted successfully!");
