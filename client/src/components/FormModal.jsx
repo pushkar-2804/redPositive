@@ -70,8 +70,9 @@ const FormModal = () => {
         <Box sx={style}>
           <div className="modal-container">
             <form className="modal-form" onSubmit={handleSubmit}>
-              {inputFields.map((field) => (
+              {inputFields.map((field, index) => (
                 <TextField
+                  key={index}
                   label={field.name}
                   name={field.value}
                   value={formData[field.value]}

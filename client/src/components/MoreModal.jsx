@@ -2,6 +2,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 export default function MoreModal() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,7 +23,7 @@ export default function MoreModal() {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        More
+        <MoreVertIcon />
       </Button>
       <Menu
         id="basic-menu"
@@ -33,12 +34,8 @@ export default function MoreModal() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>
-          <Button>Edit</Button>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Button>Delete</Button>
-        </MenuItem>
+        <MenuItem onClick={handleClose}>Edit</MenuItem>
+        <MenuItem onClick={handleClose}>Delete</MenuItem>
       </Menu>
     </div>
   );
