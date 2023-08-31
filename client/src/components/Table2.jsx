@@ -102,7 +102,7 @@ const CustomTable = () => {
                 <TableCell>{item.email}</TableCell>
                 <TableCell>{item.hobbies}</TableCell>
                 <TableCell>
-                  <MoreModal detail={item} />
+                  <MoreModal detail={item} key={item._id} />
                 </TableCell>
               </TableRow>
             ))}
