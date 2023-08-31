@@ -11,7 +11,7 @@ const validateForm = (formData) => {
   }
   if (!formData.phone.trim()) errors.phone = "Phone number is required";
   else if (!/^[6-9]([0-9]){9}$/.test(formData.phone)) {
-    errors.phone = "Phone can only contain digits";
+    errors.phone = "Invalid Phone Number";
   }
 
   if (!formData.email.trim()) errors.email = "Email is required";

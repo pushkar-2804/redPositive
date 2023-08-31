@@ -106,7 +106,7 @@ const FormModal = () => {
                 type="button"
                 variant="contained"
                 color="secondary"
-                onClick={handleSubmit}
+                onClick={handleClose}
               >
                 Cancel
               </Button>
